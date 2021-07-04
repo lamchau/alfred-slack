@@ -1,7 +1,6 @@
 alfred-slack
 ============
 
-[![Gitter](https://badges.gitter.im/yannickglt/alfred-slack.svg)](https://gitter.im/yannickglt/alfred-slack?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 Open conversation with a contact in Slack
 
