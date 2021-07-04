@@ -1,7 +1,7 @@
-(function (window) {
-
-  var REDIRECT_URI = 'https://yannickglt.github.io/alfred-slack/';
-  var SCOPE = [
+(window => {
+  const OAUTH_URL = 'https://slack.com/oauth/authorize?client_id=__CLIENT_ID__&scope=__SCOPE__&team=__TEAM__&redirect_uri=__REDIRECT_URI__';
+  const REDIRECT_URI = 'https://yannickglt.github.io/alfred-slack/';
+  const SCOPE = Object.freeze([
     'channels:history',
     'channels:write',
     'channels:read',
@@ -21,12 +21,10 @@
     'users.profile:write',
     'users:read',
     'users:write'
-  ];
-  var OAUTH_URL = 'https://slack.com/oauth/authorize?client_id=__CLIENT_ID__&scope=__SCOPE__&team=__TEAM__&redirect_uri=__REDIRECT_URI__';
+  ]);
 
-  window.addEventListener('load', function () {
-
-    var step = (getParameterByName('code') !== null) ? 2 : 1;
+  window.addEventListener('load', () => {
+    const step = (getParameterByName('code') !== null) ? 2 : 1;
     if (step === 1) {
       document.getElementById('step-1').style.display = 'block';
       document.getElementById('step-2').style.display = 'none';
@@ -36,7 +34,7 @@
       fillCode();
     }
 
-    var clipboard = new Clipboard('#code-btn');
+    const clipboard = new Clipboard('#code-btn');
     clipboard.on('success', function (e) {
       e.clearSelection();
       showTooltip(e.trigger, 'Copied!');
@@ -55,16 +53,20 @@
   }
 
   function generateCode() {
-    var team = document.getElementById('team').value.toLowerCase();
-    var clientId = document.getElementById('client_id').value;
-    var redirectUrl = encodeURIComponent(REDIRECT_URI + '?client_id=' + clientId);
-    var scope = encodeURIComponent(SCOPE.join(' '));
-    var url = OAUTH_URL.replace(/__TEAM__/g, team).replace(/__CLIENT_ID__/g, clientId).replace(/__REDIRECT_URI__/g, redirectUrl).replace(/__SCOPE__/g, scope);
+    const team = document.getElementById('team').value.toLowerCase();
+    const clientId = document.getElementById('client_id').value;
+    const redirectUrl = encodeURIComponent(`${REDIRECT_URI}?client_id=${clientId}`);
+    const scope = encodeURIComponent(SCOPE.join(' '));
+    const url = OAUTH_URL
+        .replace(/__TEAM__/g, team)
+        .replace(/__CLIENT_ID__/g, clientId)
+        .replace(/__REDIRECT_URI__/g, redirectUrl)
+        .replace(/__SCOPE__/g, scope);
     window.open(url, '_self');
   }
 
   function fillCode() {
-    var code = getParameterByName('client_id') + '|' + getParameterByName('code');
+    const code = getParameterByName('client_id') + '|' + getParameterByName('code');
     document.getElementById('code').value = code;
   }
 
@@ -73,7 +75,7 @@
       url = window.location.href;
     }
     name = name.replace(/[\[\]]/g, '\\$&');
-    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+    const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
       results = regex.exec(url);
     if (!results) {
       return null;
