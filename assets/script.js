@@ -1,6 +1,6 @@
-(window => {
+(indow => {
   const OAUTH_URL = 'https://slack.com/oauth/authorize?client_id=__CLIENT_ID__&scope=__SCOPE__&team=__TEAM__&redirect_uri=__REDIRECT_URI__';
-  const REDIRECT_URI = 'https://yannickglt.github.io/alfred-slack/';
+  const REDIRECT_URI = 'https://lamchau.github.io/alfred-slack/';
   const SCOPE = Object.freeze([
     'channels:history',
     'channels:write',
