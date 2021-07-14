@@ -11,7 +11,7 @@ use Frlnc\Slack\Http\SlackResponseFactory;
 
 class MultiTeamSlackService implements SlackServiceInterface {
 
-  private static $redirectUri = 'https://yannickglt.github.io/alfred-slack/';
+  private static $redirectUri = 'https://lamchau.github.io/alfred-slack/';
 
   private $services = [];
 
